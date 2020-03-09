@@ -1,6 +1,7 @@
 const express = require("express");
-const uploadController = require('../controller/upload.controller');
 const multer = require('multer');
+const uploadController = require('../controller/upload.controller');
+const pathController = require('../../../util/pathName')
 let newFileName = '';
 
 const storage = multer.diskStorage({
@@ -8,7 +9,7 @@ const storage = multer.diskStorage({
         callback(null,'./uploads/')
     },
     filename:function(req,file,callback){
-        newFileName = new Date().toISOString()+ file.originalname;
+        newFileName = pathController.pathName(file.originalname);
         callback(null,newFileName);
     }
     
